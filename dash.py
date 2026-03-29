@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Configuration de la page (DOIT être la première commande Streamlit)
+# Configuration de la page 
 st.set_page_config(page_title='Real Time Science Dashboard',
                    page_icon='😇✅🤗', layout='wide')
 
@@ -14,7 +14,6 @@ df = pd.read_csv('bank.csv')
 st.title("Real Time / Live Data Analysis")
 
 # Filtre sur le type de job
-# Correction : st.selectbox et df.unique
 job_filter = st.selectbox("Select a job", df["job"].unique())
 
 # Application du filtre
@@ -30,7 +29,7 @@ balance = np.mean(df_selection["balance"])
 kpi1, kpi2, kpi3 = st.columns(3)
 
 kpi1.metric(label='Âge moyen ⏳', value=round(avg_age), delta=round(avg_age))
-# Correction : kpi2, delta (au lieu de detta) et fermeture de la parenthèse )
+
 kpi2.metric(label='Mariés 💍', value=count_married, delta=count_married)
 kpi3.metric(label='Balance moyenne $', value=f"${round(balance,2)}",
             delta=-round(balance/max(1, count_married))*100)
@@ -46,8 +45,8 @@ with col1:
 
 with col2:
     st.markdown('### DISTRIBUTION DES ÂGES')
-    fig2 = plt.figure() # Correction : fig2 (sans espace)
-    sns.histplot(data=df_selection, x='age', kde=True) # Correction : x='age' pour un histogramme classique
+    fig2 = plt.figure() 
+    sns.histplot(data=df_selection, x='age', kde=True)
     st.pyplot(fig2)
     
 st.markdown('### VUE DÉTAILLÉE DES DONNÉES')
